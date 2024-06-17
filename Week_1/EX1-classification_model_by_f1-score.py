@@ -17,6 +17,7 @@ def classifi(tp, fp, fn):
             print(f"Recall is {recall}")
             print(f"F1-score is {f1}")
 
+
 # test
 f1_score(tp=2, fp=3, fn=4)
 f1_score(tp='a', fp=3, fn=4)

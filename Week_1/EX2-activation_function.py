@@ -1,11 +1,13 @@
 import math
 
+
 def is_number(n):
     try:
         float(n)
     except ValueError:
         return False
     return True
+
 
 def activate_function():
     x = input("Input x = ")
@@ -20,7 +22,8 @@ def activate_function():
     relu = max(0, x)
     elu = x if x > 0 else 0.01 * (math.exp(x) - 1)
 
-    choose_activate_function = input("Input activation function (sigmoid | relu | elu): ")
+    choose_activate_function = input(
+        "Input activation function (sigmoid | relu | elu): ")
 
     if choose_activate_function not in ["sigmoid", "relu", "elu"]:
         print(f"{choose_activate_function} is not supported")
@@ -32,5 +35,6 @@ def activate_function():
         print(f"relu: f({x}) = {relu}")
     elif choose_activate_function == "elu":
         print(f"elu: f({x}) = {elu}")
+
 
 activate_function()

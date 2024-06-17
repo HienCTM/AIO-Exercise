@@ -1,4 +1,4 @@
-def classifi(tp, fp, fn):
+def f1_score(tp, fp, fn):
     if type(tp) is not int:
         return ("tp must be int")
     elif type(fp) is not int:
@@ -11,13 +11,12 @@ def classifi(tp, fp, fn):
         else:
             precision = tp / (tp + fp)
             recall = (tp / (tp + fn))
-            f1score = 2 * (precision * recall) / (precision + recall)
+            f1_score = 2 * (precision * recall) / (precision + recall)
 
             print(f"Precision is {precision}")
             print(f"Recall is {recall}")
-            print(f"F1-score is {f1}")
-
+            print(f"F1-score is {f1_score}")
 
 # test
-f1_score(tp=2, fp=3, fn=4)
-f1_score(tp='a', fp=3, fn=4)
+f1_score(tp = 2, fp = 3, fn =4 )
+f1_score(tp ='a', fp = 3, fn = 4)

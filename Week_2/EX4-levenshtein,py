@@ -1,0 +1,40 @@
+def levenshtein(src, tar):
+    del_cost = 1  # Chi phí xóa một ký tự
+    ins_cost = 1  # Chi phí chèn một ký tự
+
+    def sub_cost(src_idx, tar_idx):
+        cost = 1
+        if src[src_idx-1] == tar[tar_idx-1]:
+            cost = 0
+        return cost
+
+    # Bước 1: Khởi tạo độ dài các chuỗi
+    len_src = len(src) + 1
+    len_tar = len(tar) + 1
+    
+    # Bước 2: Khởi tạo ma trận D[l][m] có kích thước (len_src) x (len_tar)
+    D = [[]*len_tar]*len_src  # Tạo một ma trận rỗng
+
+    # Bước 3: Khởi tạo giá trị ban đầu cho ma trận D
+    D[0] = [i for i in range(len_tar)]  # Dòng đầu tiên của ma trận D
+    for i in range(1, len_src):
+        D[i] = [i] + [0] * (len_tar-1)  # Các dòng còn lại của ma trận D, mỗi dòng đầu tiên là chỉ số của dòng
+
+    # Bước 4: Tính toán ma trận D
+    for i in range(1, len_src):
+        for j in range(1, len_tar):
+            # Tính các chi phí
+            tar_del = D[i-1][j] + del_cost  # Chi phí xóa ký tự trong chuỗi mục tiêu
+            src_ins = D[i][j-1] + ins_cost  # Chi phí chèn ký tự vào chuỗi nguồn
+            sub = D[i-1][j-1] + sub_cost(i, j)  # Chi phí thay thế ký tự
+
+            # Lấy giá trị nhỏ nhất và gán vào ma trận D
+            D[i][j] = min(tar_del, src_ins, sub)
+
+    # Trả về giá trị ở ô cuối cùng của ma trận D, đó chính là khoảng cách chỉnh sửa giữa hai chuỗi
+    return D[len_src-1][len_tar-1]
+
+# In ra các giá trị khoảng cách chỉnh sửa giữa các cặp chuỗi khác nhau
+print(levenshtein('yu', 'you'))  # Output: 1
+print(levenshtein('I', 'you'))   # Output: 3
+print(levenshtein('love', 'you'))  # Output: 3

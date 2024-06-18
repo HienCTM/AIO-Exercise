@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "ienctm",
+        "projectKey": "HienCTM_AIO-Exercise"
+    }
+}
